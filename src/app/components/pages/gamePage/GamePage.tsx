@@ -7,7 +7,7 @@ const GamePage: FC = () => {
   return (
     <div className={styles.wrapper}>
       <Timer time={10} />
-      <GameField size={10} />
+      <GameField size={2} />
     </div>
   );
 };

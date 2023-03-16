@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 import styles from './index.module.css';
 
 const Mine = -1;
@@ -54,6 +54,23 @@ const GameField: FC<Props> = ({ size }) => {
   const dimension = new Array(size).fill(0);
   const [field, setField] = useState<number[]>(callCreateField);
   const [mask, setMask] = useState<Mask[]>(createMask);
+  const [died, setDied] = useState(false);
+
+  function chekedWin() {
+    let cheked = 0;
+    field.forEach((f, i) => {
+      if (
+        (f !== Mine && mask[i] === Mask.Transparent) ||
+        (f === Mine && mask[i] === Mask.Flag)
+      ) {
+        cheked += 1;
+      }
+    });
+    if (cheked === field.length) {
+      return true;
+    }
+  }
+  console.log(field);
 
   function clickCell(x: number, y: number) {
     if (mask[y * size + x] === Mask.Transparent) return;
@@ -74,28 +91,58 @@ const GameField: FC<Props> = ({ size }) => {
       clear(x, y + 1);
       clear(x, y - 1);
     }
+    if (field[y * size + x] === Mine) {
+      mask.forEach((_, i) => (mask[i] = Mask.Transparent));
+      setDied(true);
+    }
     setMask(prev => [...prev]);
+    chekedWin();
+    console.log(stylesCell());
+  }
+
+  function stylesCell(): string {
+    if (!died) {
+      if (chekedWin() === true) {
+        return '#FFB';
+      }
+      return 'rgb(201, 201, 201)';
+    }
+    return '#FAA';
+  }
+
+  function clickContextMenu(x: number, y: number) {
+    if (mask[y * size + x] === Mask.Transparent) return;
+    if (mask[y * size + x] === Mask.Fill) {
+      mask[y * size + x] = Mask.Flag;
+    } else if (mask[y * size + x] === Mask.Flag) {
+      mask[y * size + x] = Mask.Question;
+    } else if (mask[y * size + x] === Mask.Question) {
+      mask[y * size + x] = Mask.Fill;
+    }
+    setMask(prev => [...prev]);
+    chekedWin();
+    console.log(stylesCell());
   }
   return (
     <div className={styles.wrapperGame}>
       {dimension.map((_, y) => (
-        <div key={y} style={{ display: 'flex' }}>
+        <div
+          key={y}
+          style={{
+            display: 'flex',
+          }}
+        >
           {dimension.map((_, x) => (
             <div
+              style={{
+                backgroundColor: stylesCell(),
+              }}
               onClick={() => {
                 clickCell(x, y);
               }}
               onContextMenu={e => {
                 e.preventDefault();
-                if (mask[y * size + x] === Mask.Transparent) return;
-                if (mask[y * size + x] === Mask.Fill) {
-                  mask[y * size + x] = Mask.Flag;
-                } else if (mask[y * size + x] === Mask.Flag) {
-                  mask[y * size + x] = Mask.Question;
-                } else if (mask[y * size + x] === Mask.Question) {
-                  mask[y * size + x] = Mask.Fill;
-                }
-                setMask(prev => [...prev]);
+                clickContextMenu(x, y);
               }}
               key={x}
               className={styles.cell}
