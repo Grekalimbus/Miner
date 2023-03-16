@@ -1,0 +1,36 @@
+.wrapper{
+    margin: 0 auto;
+    width: 70%;
+    height: 100%;
+    border: 1px solid #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.wrapperGame{
+    margin-top: 50px;
+    width: 80%;
+    height: 100%;
+    border: 3px solid #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.cell{
+    height: 40px;
+    width: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 2px solid rgb(68, 68, 68);
+    margin: 1px;
+    border-radius: 2px;
+    background-color: rgb(201, 201, 201);
+    cursor: pointer;
+}

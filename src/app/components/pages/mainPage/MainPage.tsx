@@ -10,9 +10,9 @@ const MainPage: FC = () => {
         Это игра Сапёр и ты можешь выбрать одну из 3-х сложностей
       </h2>
       <div className={styles.buttonsMainPage}>
-        <ButtonMainPage title="Простой 8x8, 10 мин" />
-        <ButtonMainPage title="Средний 16x16, 40 мин" />
-        <ButtonMainPage title="Сложный 32x16, 100 мин" />
+        <ButtonMainPage title="Простой 8x8, 10 мин" id="1" />
+        <ButtonMainPage title="Средний 16x16, 40 мин" id="2" />
+        <ButtonMainPage title="Сложный 32x16, 100 мин" id="3" />
       </div>
     </div>
   );
