@@ -34,3 +34,30 @@
     background-color: rgb(201, 201, 201);
     cursor: pointer;
 }
+
+
+@media (max-width: 760px) {
+    .wrapper{
+        width: 100%;
+    }
+    .wrapperGame{
+        width: 90%;
+    }
+    .cell{
+        height: 30px;
+        width: 30px;
+    }
+}
+
+@media (max-width: 300px) {
+    .wrapper{
+        width: 100%;
+    }
+    .wrapperGame{
+        width: 90%;
+    }
+    .cell{
+        height: 22px;
+        width: 22px;
+    }
+}
