@@ -1,13 +1,21 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState, useCallback } from 'react';
 import styles from './index.module.css';
 import Timer from '../../common/Timer';
 import GameField from './GameField';
 
 const GamePage: FC = () => {
+  const [win, setWin] = useState<boolean>(false);
+  useEffect(() => {
+    console.log(win);
+  }, [win]);
+  const changeWin = (value: boolean) => {
+    setWin(true);
+  };
+
   return (
     <div className={styles.wrapper}>
       <Timer time={10} />
-      <GameField size={2} />
+      <GameField size={2} changeWin={changeWin} />
     </div>
   );
 };

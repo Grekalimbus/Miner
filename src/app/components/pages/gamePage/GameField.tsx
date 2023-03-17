@@ -1,6 +1,25 @@
 import React, { FC, useEffect, useMemo, useState } from 'react';
 import styles from './index.module.css';
 
+interface Props {
+  size: number;
+  changeWin: (value: boolean) => void;
+}
+
+enum Mask {
+  Transparent,
+  Fill,
+  Flag,
+  Question,
+}
+
+const mapMaskToView: Record<Mask, React.ReactNode> = {
+  [Mask.Transparent]: '',
+  [Mask.Fill]: '',
+  [Mask.Flag]: '🚩',
+  [Mask.Question]: '❓',
+};
+
 const Mine = -1;
 function createField(size: number): number[] {
   const field: number[] = new Array(size * size).fill(0);
@@ -30,31 +49,18 @@ function createField(size: number): number[] {
   return field;
 }
 
-interface Props {
-  size: number;
-}
-
-enum Mask {
-  Transparent,
-  Fill,
-  Flag,
-  Question,
-}
-
-const mapMaskToView: Record<Mask, React.ReactNode> = {
-  [Mask.Transparent]: '',
-  [Mask.Fill]: '',
-  [Mask.Flag]: '🚩',
-  [Mask.Question]: '❓',
-};
-
-const GameField: FC<Props> = ({ size }) => {
+const GameField: FC<Props> = ({ size, changeWin }) => {
   const callCreateField = createField(size);
   const createMask = new Array(size * size).fill(Mask.Fill);
   const dimension = new Array(size).fill(0);
   const [field, setField] = useState<number[]>(callCreateField);
   const [mask, setMask] = useState<Mask[]>(createMask);
   const [died, setDied] = useState(false);
+  useEffect(() => {
+    if (chekedWin()) {
+      changeWin(true);
+    }
+  }, [chekedWin()]);
 
   function chekedWin() {
     let cheked = 0;
@@ -67,6 +73,7 @@ const GameField: FC<Props> = ({ size }) => {
       }
     });
     if (cheked === field.length) {
+      // changeWin(true);
       return true;
     }
   }
@@ -97,7 +104,6 @@ const GameField: FC<Props> = ({ size }) => {
     }
     setMask(prev => [...prev]);
     chekedWin();
-    console.log(stylesCell());
   }
 
   function stylesCell(): string {
@@ -121,7 +127,6 @@ const GameField: FC<Props> = ({ size }) => {
     }
     setMask(prev => [...prev]);
     chekedWin();
-    console.log(stylesCell());
   }
   return (
     <div className={styles.wrapperGame}>

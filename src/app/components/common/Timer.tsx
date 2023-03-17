@@ -13,8 +13,13 @@ const Timer: FC<Props> = ({ time }) => {
       setSeconds((prevSeconds: number) => prevSeconds - 1);
     }, 1000);
 
+    if (seconds === 0) {
+      clearInterval(interval);
+      // perform any required cleanup here
+    }
+
     return (): void => clearInterval(interval);
-  }, []);
+  }, [seconds]);
 
   const minutes: number = Math.floor(seconds / 60);
   const remainingSeconds: number = seconds % 60;
