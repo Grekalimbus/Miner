@@ -3,14 +3,17 @@ import styles from './index.module.css';
 
 interface Props {
   time: number;
+  win: boolean;
 }
 
-const Timer: FC<Props> = ({ time }) => {
+const Timer: FC<Props> = ({ time, win }) => {
   const [seconds, setSeconds] = useState<number>(time * 60);
 
   useEffect(() => {
     const interval: NodeJS.Timeout = setInterval(() => {
-      setSeconds((prevSeconds: number) => prevSeconds - 1);
+      if (!win) {
+        setSeconds((prevSeconds: number) => prevSeconds - 1);
+      }
     }, 1000);
 
     if (seconds === 0) {
@@ -19,7 +22,7 @@ const Timer: FC<Props> = ({ time }) => {
     }
 
     return (): void => clearInterval(interval);
-  }, [seconds]);
+  }, [win, seconds]);
 
   const minutes: number = Math.floor(seconds / 60);
   const remainingSeconds: number = seconds % 60;
