@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useMemo, useState } from 'react';
+import { numberColor } from 'src/app/utils/numberColor';
 import styles from './index.module.css';
 
 interface Props {
@@ -67,13 +68,13 @@ const GameField: FC<Props> = ({ size, changeWin }) => {
     field.forEach((f, i) => {
       if (
         (f !== Mine && mask[i] === Mask.Transparent) ||
-        (f === Mine && mask[i] === Mask.Flag)
+        (f === Mine && mask[i] === Mask.Flag) ||
+        (f === Mine && mask[i] === Mask.Fill)
       ) {
         cheked += 1;
       }
     });
     if (cheked === field.length) {
-      // changeWin(true);
       return true;
     }
   }
@@ -109,11 +110,11 @@ const GameField: FC<Props> = ({ size, changeWin }) => {
   function stylesCell(): string {
     if (!died) {
       if (chekedWin() === true) {
-        return '#FFB';
+        return 'rgba(236, 146, 11, 0.932)';
       }
-      return 'rgb(201, 201, 201)';
+      return '(233, 233, 233, 0.342)';
     }
-    return '#FAA';
+    return 'rgba(219, 22, 22, 0.596)';
   }
 
   function clickContextMenu(x: number, y: number) {
@@ -128,6 +129,7 @@ const GameField: FC<Props> = ({ size, changeWin }) => {
     setMask(prev => [...prev]);
     chekedWin();
   }
+
   return (
     <div className={styles.wrapperGame}>
       {dimension.map((_, y) => (
@@ -141,13 +143,14 @@ const GameField: FC<Props> = ({ size, changeWin }) => {
             <div
               style={{
                 backgroundColor: stylesCell(),
+                color: numberColor(field[y * size + x]),
               }}
               onClick={() => {
-                clickCell(x, y);
+                chekedWin() ?? clickCell(x, y);
               }}
               onContextMenu={e => {
                 e.preventDefault();
-                clickContextMenu(x, y);
+                chekedWin() ?? clickContextMenu(x, y);
               }}
               key={x}
               className={styles.cell}
