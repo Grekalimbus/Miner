@@ -5,7 +5,7 @@ import styles from './index.module.css';
 
 interface Props {
   sizeX: number;
-  changeWin: (value: boolean) => void;
+  changeWin: () => void;
 }
 
 enum Mask {
@@ -33,7 +33,7 @@ const GameField: FC<Props> = ({ sizeX, changeWin }) => {
   const [died, setDied] = useState(false);
   useEffect(() => {
     if (chekedWin()) {
-      changeWin(true);
+      changeWin();
     }
   }, [chekedWin()]);
 
@@ -115,6 +115,7 @@ const GameField: FC<Props> = ({ sizeX, changeWin }) => {
         >
           {dimension.map((_, x) => (
             <div
+              className={sizeX < 9 ? styles.cellSmall : styles.cellBig}
               style={{
                 backgroundColor: stylesCell(),
                 color: numberColor(field[y * sizeX + x]),
@@ -127,7 +128,6 @@ const GameField: FC<Props> = ({ sizeX, changeWin }) => {
                 chekedWin() ?? clickContextMenu(x, y);
               }}
               key={x}
-              className={styles.cell}
             >
               {mask[y * sizeX + x] !== Mask.Transparent
                 ? mapMaskToView[mask[y * sizeX + x]]
@@ -138,6 +138,8 @@ const GameField: FC<Props> = ({ sizeX, changeWin }) => {
           ))}
         </div>
       ))}
+      <button className={styles.button}>Перезапуск игры</button>
+      <button className={styles.button}>Перезапуск игры</button>
     </div>
   );
 };

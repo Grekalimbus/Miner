@@ -1,6 +1,6 @@
 .wrapper{
     margin: 0 auto;
-    width: 70%;
+    width: 100%;
     height: 100%;
     border: 1px solid #000;
     display: flex;
@@ -10,19 +10,30 @@
 }
 
 .wrapperGame{
-    margin-top: 50px;
-    width: 80%;
+    margin-top: 20px;
+    width: 100%;
     height: 100%;
     border: 3px solid #000;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;    
 }
-
-.cell{
-    height: 40px;
-    width: 40px;
+.cellSmall{
+    height: 64px;
+    width: 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 2px solid rgb(218, 214, 214);
+    margin: 1px;
+    border-radius: 2px;    
+    cursor: pointer;
+}
+.cellBig{
+    height: 28px;
+    width: 28px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -34,29 +45,95 @@
     cursor: pointer;
 }
 
+.button{
+    margin-top: 15px;
+    width: 30%;
+    height: 35px;
+    color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+    justify-content: center;
+    border-radius: 5px; 
+    background-color: rgb(20, 20, 20);  
+}
+.button:hover{
+    border: 2px solid rgb(209, 208, 208);
+}
 
-@media (max-width: 760px) {
-    .wrapper{
-        width: 100%;
-    }
-    .wrapperGame{
-        width: 90%;
-    }
-    .cell{
+@media (max-height: 600px) {        
+    .cellSmall{
+        height: 46px;
+        width: 46px;         
+    }       
+}
+@media (max-height: 500px) {        
+    .cellSmall{
+        height: 40px;
+        width: 40px;         
+    }       
+}
+@media (max-height: 400px) {        
+    .cellSmall{
         height: 30px;
-        width: 30px;
+        width: 30px;         
+    }       
+}
+
+@media (max-width: 760px) {        
+    .cellSmall{
+        height: 52px;
+        width: 52px;        
+    }   
+    .cellBig{
+        height: 30px;
+        width: 30px; 
+    } 
+    .button{
+        width: 80%;
+    }
+}
+@media (max-width: 560px) {        
+    .cellSmall{
+        height: 46px;
+        width: 46px;      
+    }    
+    .cellBig{
+        height: 26px;
+        width: 26px; 
     }
 }
 
-@media (max-width: 300px) {
+@media (max-width: 420px) {
     .wrapper{
         width: 100%;
     }
     .wrapperGame{
         width: 90%;
     }
-    .cell{
-        height: 22px;
-        width: 22px;
+    .cellSmall{
+        height: 40px;
+        width: 40px;
+    }
+    .cellBig{
+        height: 20px;
+        width: 20px; 
+    }
+}
+
+@media (max-width: 290px) {
+    .wrapper{
+        width: 100%;
+    }
+    .wrapperGame{
+        width: 100%;
+    }    
+    .cellSmall{
+        height: 32px;
+        width: 32px;
+    }
+    .cellBig{
+        height: 15px;
+        width: 15px; 
     }
 }

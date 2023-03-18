@@ -8,14 +8,14 @@ const GamePage: FC = () => {
   useEffect(() => {
     console.log(win);
   }, [win]);
-  const changeWin = (value: boolean) => {
+  const changeWin = () => {
     setWin(true);
   };
 
   return (
     <div className={styles.wrapper}>
       <Timer time={10} win={win} />
-      <GameField sizeX={4} changeWin={changeWin} />
+      <GameField sizeX={16} changeWin={changeWin} />
     </div>
   );
 };
