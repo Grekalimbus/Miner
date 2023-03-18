@@ -9,8 +9,16 @@ interface Props {
 
 const ButtonMainPage: FC<Props> = ({ title, id }) => {
   const history = useHistory();
+  function stylesTable() {
+    if (id !== 'table') return;
+    return { width: '60%', height: '40px', 'margin-top': '30px' };
+  }
   return (
-    <button onClick={() => history.push(`/play/${id}`)} className={styles.buttonMainPage}>
+    <button
+      onClick={() => history.push(id !== 'table' ? `/play/${id}` : `/${id}`)}
+      className={styles.buttonMainPage}
+      style={stylesTable()}
+    >
       {title}
     </button>
   );

@@ -21,7 +21,7 @@ html,body{
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-  background-color: rgba(8, 8, 8, 0.658);
+  background-color: rgb(39, 39, 39);
   font-family: 'Lilita One', cursive;
 }
 input,button,textarea{font-family:inherit;}

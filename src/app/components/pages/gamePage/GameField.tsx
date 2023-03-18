@@ -1,9 +1,10 @@
 import React, { FC, useEffect, useMemo, useState } from 'react';
+import { createField } from 'src/app/utils/createField';
 import { numberColor } from 'src/app/utils/numberColor';
 import styles from './index.module.css';
 
 interface Props {
-  size: number;
+  sizeX: number;
   changeWin: (value: boolean) => void;
 }
 
@@ -22,38 +23,11 @@ const mapMaskToView: Record<Mask, React.ReactNode> = {
 };
 
 const Mine = -1;
-function createField(size: number): number[] {
-  const field: number[] = new Array(size * size).fill(0);
-  function inc(x: number, y: number) {
-    if (x >= 0 && x < size && y >= 0 && y < size) {
-      if (field[y * size + x] === Mine) return;
-      field[y * size + x] += 1;
-    }
-  }
 
-  for (let i = 0; i < size; ) {
-    const x = Math.floor(Math.random() * size);
-    const y = Math.floor(Math.random() * size);
-
-    if (field[y * size + x] === Mine) continue;
-    field[y * size + x] = Mine;
-    i += 1;
-    inc(x + 1, y);
-    inc(x - 1, y);
-    inc(x, y + 1);
-    inc(x, y - 1);
-    inc(x + 1, y - 1);
-    inc(x - 1, y - 1);
-    inc(x + 1, y + 1);
-    inc(x - 1, y + 1);
-  }
-  return field;
-}
-
-const GameField: FC<Props> = ({ size, changeWin }) => {
-  const callCreateField = createField(size);
-  const createMask = new Array(size * size).fill(Mask.Fill);
-  const dimension = new Array(size).fill(0);
+const GameField: FC<Props> = ({ sizeX, changeWin }) => {
+  const callCreateField = createField(sizeX, Mine);
+  const createMask = new Array(sizeX * sizeX).fill(Mask.Fill);
+  const dimension = new Array(sizeX).fill(0);
   const [field, setField] = useState<number[]>(callCreateField);
   const [mask, setMask] = useState<Mask[]>(createMask);
   const [died, setDied] = useState(false);
@@ -81,25 +55,25 @@ const GameField: FC<Props> = ({ size, changeWin }) => {
   console.log(field);
 
   function clickCell(x: number, y: number) {
-    if (mask[y * size + x] === Mask.Transparent) return;
+    if (mask[y * sizeX + x] === Mask.Transparent) return;
     const clearing: [number, number][] = [];
     function clear(x: number, y: number) {
-      if (x >= 0 && x < size && y >= 0 && y < size) {
-        if (mask[y * size + x] === Mask.Transparent) return;
+      if (x >= 0 && x < sizeX && y >= 0 && y < sizeX) {
+        if (mask[y * sizeX + x] === Mask.Transparent) return;
         clearing.push([x, y]);
       }
     }
     clear(x, y);
     while (clearing.length) {
       const [x, y] = clearing.pop()!!;
-      mask[y * size + x] = Mask.Transparent;
-      if (field[y * size + x] !== 0) continue;
+      mask[y * sizeX + x] = Mask.Transparent;
+      if (field[y * sizeX + x] !== 0) continue;
       clear(x + 1, y);
       clear(x - 1, y);
       clear(x, y + 1);
       clear(x, y - 1);
     }
-    if (field[y * size + x] === Mine) {
+    if (field[y * sizeX + x] === Mine) {
       mask.forEach((_, i) => (mask[i] = Mask.Transparent));
       setDied(true);
     }
@@ -118,13 +92,13 @@ const GameField: FC<Props> = ({ size, changeWin }) => {
   }
 
   function clickContextMenu(x: number, y: number) {
-    if (mask[y * size + x] === Mask.Transparent) return;
-    if (mask[y * size + x] === Mask.Fill) {
-      mask[y * size + x] = Mask.Flag;
-    } else if (mask[y * size + x] === Mask.Flag) {
-      mask[y * size + x] = Mask.Question;
-    } else if (mask[y * size + x] === Mask.Question) {
-      mask[y * size + x] = Mask.Fill;
+    if (mask[y * sizeX + x] === Mask.Transparent) return;
+    if (mask[y * sizeX + x] === Mask.Fill) {
+      mask[y * sizeX + x] = Mask.Flag;
+    } else if (mask[y * sizeX + x] === Mask.Flag) {
+      mask[y * sizeX + x] = Mask.Question;
+    } else if (mask[y * sizeX + x] === Mask.Question) {
+      mask[y * sizeX + x] = Mask.Fill;
     }
     setMask(prev => [...prev]);
     chekedWin();
@@ -143,7 +117,7 @@ const GameField: FC<Props> = ({ size, changeWin }) => {
             <div
               style={{
                 backgroundColor: stylesCell(),
-                color: numberColor(field[y * size + x]),
+                color: numberColor(field[y * sizeX + x]),
               }}
               onClick={() => {
                 chekedWin() ?? clickCell(x, y);
@@ -155,11 +129,11 @@ const GameField: FC<Props> = ({ size, changeWin }) => {
               key={x}
               className={styles.cell}
             >
-              {mask[y * size + x] !== Mask.Transparent
-                ? mapMaskToView[mask[y * size + x]]
-                : field[y * size + x] === Mine
+              {mask[y * sizeX + x] !== Mask.Transparent
+                ? mapMaskToView[mask[y * sizeX + x]]
+                : field[y * sizeX + x] === Mine
                 ? '🧨'
-                : field[y * size + x]}
+                : field[y * sizeX + x]}
             </div>
           ))}
         </div>

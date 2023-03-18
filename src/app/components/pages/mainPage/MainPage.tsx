@@ -14,6 +14,7 @@ const MainPage: FC = () => {
         <ButtonMainPage title="Средний 16x16, 40 мин" id="2" />
         <ButtonMainPage title="Сложный 32x16, 100 мин" id="3" />
       </div>
+      <ButtonMainPage title="Таблица лидеров" id="table" />
     </div>
   );
 };

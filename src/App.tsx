@@ -10,12 +10,14 @@ export interface STYLES {
 function App() {
   return (
     <Switch>
-      <Route path="/" exact>
-        <MainPage />
-      </Route>
-      <Route path="/play" exact>
-        <GamePage />
-      </Route>
+      <div style={{ overflow: 'auto', height: '100vh' }}>
+        <Route path="/" exact>
+          <MainPage />
+        </Route>
+        <Route path="/play" exact>
+          <GamePage />
+        </Route>
+      </div>
     </Switch>
   );
 }
