@@ -6,9 +6,10 @@ interface Props {
   died: boolean;
   id: string;
   changeTime: (time: number) => void;
+  changeLose: () => void;
 }
 
-const Timer: FC<Props> = ({ win, died, id, changeTime }) => {
+const Timer: FC<Props> = ({ win, died, id, changeTime, changeLose }) => {
   const [seconds, setSeconds] = useState<number>(
     id === '1' ? 10 * 60 : id === '2' ? 40 * 60 : 100 * 60
   );
@@ -24,6 +25,7 @@ const Timer: FC<Props> = ({ win, died, id, changeTime }) => {
     }, 1000);
     if (seconds === 0) {
       clearInterval(interval);
+      changeLose();
     }
 
     return (): void => clearInterval(interval);

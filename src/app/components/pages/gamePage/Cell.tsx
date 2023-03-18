@@ -17,9 +17,21 @@ interface Props {
   x: number;
   setDied: React.Dispatch<React.SetStateAction<boolean>>;
   setMask: React.Dispatch<React.SetStateAction<Mask[]>>;
+  lose: boolean;
 }
 
-const Cell: FC<Props> = ({ size, field, mask, Mine, died, y, x, setDied, setMask }) => {
+const Cell: FC<Props> = ({
+  size,
+  field,
+  mask,
+  Mine,
+  died,
+  y,
+  x,
+  setDied,
+  setMask,
+  lose,
+}) => {
   function stylesForCell(size: number) {
     if (size < 9) {
       return styles.cellSmall;
@@ -29,6 +41,7 @@ const Cell: FC<Props> = ({ size, field, mask, Mine, died, y, x, setDied, setMask
       return styles.cellVeryBig;
     }
   }
+
   return (
     <div
       className={stylesForCell(size)}
@@ -37,13 +50,17 @@ const Cell: FC<Props> = ({ size, field, mask, Mine, died, y, x, setDied, setMask
         color: numberColor(field[y * size + x]),
       }}
       onClick={() => {
-        chekedWin(field, mask, Mine) ??
-          clickCell(x, y, mask, size, field, Mine, setMask, setDied);
+        if (!lose) {
+          chekedWin(field, mask, Mine) ??
+            clickCell(x, y, mask, size, field, Mine, setMask, setDied);
+        }
       }}
       onContextMenu={e => {
         e.preventDefault();
-        chekedWin(field, mask, Mine) ??
-          clickContextMenu(x, y, mask, size, setMask, field, Mine);
+        if (!lose) {
+          chekedWin(field, mask, Mine) ??
+            clickContextMenu(x, y, mask, size, setMask, field, Mine);
+        }
       }}
       key={x}
     >
