@@ -44,9 +44,17 @@
     border-radius: 2px;    
     cursor: pointer;
 }
-
-.button{
+.wrapperButton{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;    
     margin-top: 15px;
+    height: 80px;
+    width: 100%;
+}
+
+.button{    
     width: 30%;
     height: 35px;
     color: aliceblue;
