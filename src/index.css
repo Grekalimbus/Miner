@@ -1,3 +1,4 @@
+
 *{
   padding: 0;
   margin: 0;
@@ -20,6 +21,8 @@ html,body{
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
+  background-color: rgb(39, 39, 39);
+  font-family: 'Lilita One', cursive;
 }
 input,button,textarea{font-family:inherit;}
 input::-ms-clear{display: none;}
