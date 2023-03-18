@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useMemo, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { createField } from 'src/app/utils/createField';
 import { numberColor } from 'src/app/utils/numberColor';
 import styles from './index.module.css';
@@ -6,6 +7,7 @@ import styles from './index.module.css';
 interface Props {
   sizeX: number;
   changeWin: () => void;
+  changeDied: () => void;
 }
 
 enum Mask {
@@ -24,7 +26,8 @@ const mapMaskToView: Record<Mask, React.ReactNode> = {
 
 const Mine = -1;
 
-const GameField: FC<Props> = ({ sizeX, changeWin }) => {
+const GameField: FC<Props> = ({ sizeX, changeWin, changeDied }) => {
+  const history = useHistory();
   const callCreateField = createField(sizeX, Mine);
   const createMask = new Array(sizeX * sizeX).fill(Mask.Fill);
   const dimension = new Array(sizeX).fill(0);
@@ -35,7 +38,10 @@ const GameField: FC<Props> = ({ sizeX, changeWin }) => {
     if (chekedWin()) {
       changeWin();
     }
-  }, [chekedWin()]);
+    if (died) {
+      changeDied();
+    }
+  }, [chekedWin(), died]);
 
   function chekedWin() {
     let cheked = 0;
@@ -138,8 +144,22 @@ const GameField: FC<Props> = ({ sizeX, changeWin }) => {
           ))}
         </div>
       ))}
-      <button className={styles.button}>Перезапуск игры</button>
-      <button className={styles.button}>Перезапуск игры</button>
+      <button
+        className={styles.button}
+        onClick={() => {
+          window.location.reload();
+        }}
+      >
+        Перезапуск игры
+      </button>
+      <button
+        className={styles.button}
+        onClick={() => {
+          history.push('/');
+        }}
+      >
+        Экран настроек
+      </button>
     </div>
   );
 };

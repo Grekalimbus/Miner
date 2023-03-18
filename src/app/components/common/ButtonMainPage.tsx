@@ -11,7 +11,7 @@ const ButtonMainPage: FC<Props> = ({ title, id }) => {
   const history = useHistory();
   function stylesTable() {
     if (id !== 'table') return;
-    return { width: '60%', height: '40px', 'margin-top': '30px' };
+    return { width: '60%', height: '40px', marginTop: '30px' };
   }
   return (
     <button
