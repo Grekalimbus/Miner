@@ -1,28 +1,39 @@
-import React, { FC, useEffect, useMemo, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { FC, useEffect, useState } from 'react';
 import { Mask } from 'src/app/utils/gameField';
 import { chekedWin } from 'src/app/utils/checkWin';
 import { createField } from 'src/app/utils/createField';
 import styles from './index.module.css';
 import Cell from './Cell';
 import Buttons from './Buttons';
+import { createBigField } from 'src/app/utils/createBigField';
+import { createVeryBigField } from 'src/app/utils/createVeryBigField';
 
 interface Props {
-  sizeX: number;
+  size: number;
   changeWin: () => void;
   changeDied: () => void;
 }
 
 const Mine = -1;
 
-const GameField: FC<Props> = ({ sizeX, changeWin, changeDied }) => {
-  const history = useHistory();
-  const callCreateField = createField(sizeX, Mine);
-  const createMask = new Array(sizeX * sizeX).fill(Mask.Fill);
-  const dimension = new Array(sizeX).fill(0);
+const GameField: FC<Props> = ({ size, changeWin, changeDied }) => {
+  const callCreateField = sizeField();
+  const createMask = new Array(size * size).fill(Mask.Fill);
+  const dimension = new Array(size).fill(0);
   const [field, setField] = useState<number[]>(callCreateField);
   const [mask, setMask] = useState<Mask[]>(createMask);
   const [died, setDied] = useState<boolean>(false);
+
+  function sizeField(): number[] {
+    if (size === 8) {
+      return createField(size, Mine);
+    }
+    if (size === 16) {
+      return createBigField(size, Mine);
+    }
+    return createVeryBigField(size, Mine);
+  }
+
   useEffect(() => {
     if (chekedWin(field, mask, Mine)) {
       changeWin();
@@ -46,7 +57,7 @@ const GameField: FC<Props> = ({ sizeX, changeWin, changeDied }) => {
           {dimension.map((_, x) => (
             <Cell
               key={x}
-              sizeX={sizeX}
+              size={size}
               field={field}
               mask={mask}
               Mine={Mine}
@@ -59,7 +70,7 @@ const GameField: FC<Props> = ({ sizeX, changeWin, changeDied }) => {
           ))}
         </div>
       ))}
-      {<Buttons />}
+      <Buttons />
     </div>
   );
 };

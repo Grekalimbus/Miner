@@ -8,7 +8,7 @@ import { clickContextMenu } from 'src/app/utils/clickContextMenu';
 import { Mask, mapMaskToView } from 'src/app/utils/gameField';
 
 interface Props {
-  sizeX: number;
+  size: number;
   field: number[];
   mask: Mask[];
   Mine: number;
@@ -19,30 +19,39 @@ interface Props {
   setMask: React.Dispatch<React.SetStateAction<Mask[]>>;
 }
 
-const Cell: FC<Props> = ({ sizeX, field, mask, Mine, died, y, x, setDied, setMask }) => {
+const Cell: FC<Props> = ({ size, field, mask, Mine, died, y, x, setDied, setMask }) => {
+  function stylesForCell(size: number) {
+    if (size === 8) {
+      return styles.cellSmall;
+    } else if (size === 16) {
+      return styles.cellBig;
+    } else if (size === 32) {
+      return styles.cellVeryBig;
+    }
+  }
   return (
     <div
-      className={sizeX < 9 ? styles.cellSmall : styles.cellBig}
+      className={stylesForCell(size)}
       style={{
         backgroundColor: stylesCell(died, field, mask, Mine),
-        color: numberColor(field[y * sizeX + x]),
+        color: numberColor(field[y * size + x]),
       }}
       onClick={() => {
         chekedWin(field, mask, Mine) ??
-          clickCell(x, y, mask, sizeX, field, Mine, setMask, setDied);
+          clickCell(x, y, mask, size, field, Mine, setMask, setDied);
       }}
       onContextMenu={e => {
         e.preventDefault();
         chekedWin(field, mask, Mine) ??
-          clickContextMenu(x, y, mask, sizeX, setMask, field, Mine);
+          clickContextMenu(x, y, mask, size, setMask, field, Mine);
       }}
       key={x}
     >
-      {mask[y * sizeX + x] !== Mask.Transparent
-        ? mapMaskToView[mask[y * sizeX + x]]
-        : field[y * sizeX + x] === Mine
+      {mask[y * size + x] !== Mask.Transparent
+        ? mapMaskToView[mask[y * size + x]]
+        : field[y * size + x] === Mine
         ? '🧨'
-        : field[y * sizeX + x]}
+        : field[y * size + x]}
     </div>
   );
 };

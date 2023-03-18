@@ -1,4 +1,4 @@
-export function createBigField(size: number, Mine: number): number[] {
+export function createVeryBigField(size: number, Mine: number): number[] {
     const numMines = Math.floor((size * size) / 10);
     const field: number[] = new Array(size * size).fill(0);
     function inc(x: number, y: number) {

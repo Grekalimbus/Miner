@@ -23,9 +23,11 @@ const GamePage: FC = () => {
     <div className={styles.wrapper}>
       <Timer time={10} win={win} died={died} />
       {id === '1' ? (
-        <GameField sizeX={8} changeWin={changeWin} changeDied={changeDied} />
+        <GameField size={8} changeWin={changeWin} changeDied={changeDied} />
+      ) : id === '2' ? (
+        <GameField size={16} changeWin={changeWin} changeDied={changeDied} />
       ) : (
-        <GameField sizeX={16} changeWin={changeWin} changeDied={changeDied} />
+        <GameField size={32} changeWin={changeWin} changeDied={changeDied} />
       )}
     </div>
   );
