@@ -1,28 +1,17 @@
 import React, { FC, useEffect, useMemo, useState } from 'react';
+import { Mask, mapMaskToView } from 'src/app/utils/gameField';
 import { useHistory } from 'react-router-dom';
+import { chekedWin } from 'src/app/utils/checkWin';
 import { createField } from 'src/app/utils/createField';
 import { numberColor } from 'src/app/utils/numberColor';
 import styles from './index.module.css';
+import { stylesCell } from 'src/app/utils/stylesCell';
 
 interface Props {
   sizeX: number;
   changeWin: () => void;
   changeDied: () => void;
 }
-
-enum Mask {
-  Transparent,
-  Fill,
-  Flag,
-  Question,
-}
-
-const mapMaskToView: Record<Mask, React.ReactNode> = {
-  [Mask.Transparent]: '',
-  [Mask.Fill]: '',
-  [Mask.Flag]: '🚩',
-  [Mask.Question]: '❓',
-};
 
 const Mine = -1;
 
@@ -35,29 +24,14 @@ const GameField: FC<Props> = ({ sizeX, changeWin, changeDied }) => {
   const [mask, setMask] = useState<Mask[]>(createMask);
   const [died, setDied] = useState(false);
   useEffect(() => {
-    if (chekedWin()) {
+    if (chekedWin(field, mask, Mine)) {
       changeWin();
     }
     if (died) {
       changeDied();
     }
-  }, [chekedWin(), died]);
+  }, [chekedWin(field, mask, Mine), died]);
 
-  function chekedWin() {
-    let cheked = 0;
-    field.forEach((f, i) => {
-      if (
-        (f !== Mine && mask[i] === Mask.Transparent) ||
-        (f === Mine && mask[i] === Mask.Flag) ||
-        (f === Mine && mask[i] === Mask.Fill)
-      ) {
-        cheked += 1;
-      }
-    });
-    if (cheked === field.length) {
-      return true;
-    }
-  }
   console.log(field);
 
   function clickCell(x: number, y: number) {
@@ -84,17 +58,7 @@ const GameField: FC<Props> = ({ sizeX, changeWin, changeDied }) => {
       setDied(true);
     }
     setMask(prev => [...prev]);
-    chekedWin();
-  }
-
-  function stylesCell(): string {
-    if (!died) {
-      if (chekedWin() === true) {
-        return 'rgba(236, 146, 11, 0.932)';
-      }
-      return '(233, 233, 233, 0.342)';
-    }
-    return 'rgba(219, 22, 22, 0.596)';
+    chekedWin(field, mask, Mine);
   }
 
   function clickContextMenu(x: number, y: number) {
@@ -107,7 +71,7 @@ const GameField: FC<Props> = ({ sizeX, changeWin, changeDied }) => {
       mask[y * sizeX + x] = Mask.Fill;
     }
     setMask(prev => [...prev]);
-    chekedWin();
+    chekedWin(field, mask, Mine);
   }
 
   return (
@@ -123,15 +87,15 @@ const GameField: FC<Props> = ({ sizeX, changeWin, changeDied }) => {
             <div
               className={sizeX < 9 ? styles.cellSmall : styles.cellBig}
               style={{
-                backgroundColor: stylesCell(),
+                backgroundColor: stylesCell(died, field, mask, Mine),
                 color: numberColor(field[y * sizeX + x]),
               }}
               onClick={() => {
-                chekedWin() ?? clickCell(x, y);
+                chekedWin(field, mask, Mine) ?? clickCell(x, y);
               }}
               onContextMenu={e => {
                 e.preventDefault();
-                chekedWin() ?? clickContextMenu(x, y);
+                chekedWin(field, mask, Mine) ?? clickContextMenu(x, y);
               }}
               key={x}
             >
