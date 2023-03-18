@@ -21,7 +21,7 @@ interface Props {
 
 const Cell: FC<Props> = ({ size, field, mask, Mine, died, y, x, setDied, setMask }) => {
   function stylesForCell(size: number) {
-    if (size === 8) {
+    if (size < 9) {
       return styles.cellSmall;
     } else if (size === 16) {
       return styles.cellBig;

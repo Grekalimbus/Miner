@@ -1,5 +1,4 @@
 import { Mask } from "./gameField";
-
 export function chekedWin(field: number[], mask: Mask[], Mine: number): boolean | undefined {
     let cheked = 0;
     field.forEach((f, i) => {

@@ -2,18 +2,24 @@ import React, { FC, useState, useEffect } from 'react';
 import styles from './index.module.css';
 
 interface Props {
-  time: number;
   win: boolean;
   died: boolean;
+  id: string;
+  changeTime: (time: number) => void;
 }
 
-const Timer: FC<Props> = ({ time, win, died }) => {
-  const [seconds, setSeconds] = useState<number>(time * 60);
+const Timer: FC<Props> = ({ win, died, id, changeTime }) => {
+  const [seconds, setSeconds] = useState<number>(
+    id === '1' ? 10 * 60 : id === '2' ? 40 * 60 : 100 * 60
+  );
 
   useEffect(() => {
     const interval: NodeJS.Timeout = setInterval(() => {
       if (!win && !died) {
         setSeconds((prevSeconds: number) => prevSeconds - 1);
+      }
+      if (win) {
+        changeTime(seconds);
       }
     }, 1000);
     if (seconds === 0) {
