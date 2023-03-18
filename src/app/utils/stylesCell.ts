@@ -1,4 +1,4 @@
-import { chekedWin } from "src/app/utils/checkWin";
+import { chekedWin } from "./checkWin";
 import { Mask } from "./gameField";
 
 export  function stylesCell(died: boolean,field: number[], mask: Mask[], Mine: number): string {
