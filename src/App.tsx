@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { useAppDispatch } from './hooks';
+import { loadData } from './app/store/tableSlice';
 import GamePage from './app/components/pages/gamePage/GamePage';
 import MainPage from './app/components/pages/mainPage/MainPage';
 
@@ -8,6 +10,11 @@ export interface STYLES {
 }
 
 function App() {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(loadData());
+  }, []);
+
   return (
     <div style={{ overflow: 'auto', height: '100vh' }}>
       <Switch>
