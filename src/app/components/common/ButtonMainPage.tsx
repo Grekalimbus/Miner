@@ -15,7 +15,7 @@ const ButtonMainPage: FC<Props> = ({ title, id }) => {
   }
   return (
     <button
-      onClick={() => history.push(id !== 'table' ? `/play/${id}` : `/${id}`)}
+      onClick={() => history.push(id !== 'table' ? `play/${id}` : `/${id}`)}
       className={styles.buttonMainPage}
       style={stylesTable()}
     >
