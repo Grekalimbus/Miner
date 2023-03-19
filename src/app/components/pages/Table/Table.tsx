@@ -20,7 +20,7 @@ const Table: FC = () => {
     <div className={styles.wrapper}>
       Сортировка по сложности
       <ButtonsLVL table={table} setTable={setTable} />
-      <button onClick={() => history.push('Miner/')} className={styles.buttonHome}>
+      <button onClick={() => history.push('/Miner')} className={styles.buttonHome}>
         Главная страница
       </button>
       {table.map(item => (
