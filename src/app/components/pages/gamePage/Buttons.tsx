@@ -17,7 +17,7 @@ const Buttons: FC = () => {
       <button
         className={styles.button}
         onClick={() => {
-          history.push('/Miner');
+          history.push('/');
         }}
       >
         Экран настроек
