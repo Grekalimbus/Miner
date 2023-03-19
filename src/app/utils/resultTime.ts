@@ -1,8 +1,12 @@
 export function formatTimeElapsed(time: number, time2: number): string {
-    const timeElapsed = time - time2;
-    const minutes = Math.floor(timeElapsed / 60);
-    const seconds = timeElapsed % 60;
-    const formattedMinutes = String(minutes).padStart(2, "0");
-    const formattedSeconds = String(seconds).padStart(2, "0");
-    return `${formattedMinutes}:${formattedSeconds}`;
-  }
+  const timeElapsed = Math.abs(time - time2);
+  const minutes = Math.floor(timeElapsed / 60);
+  const seconds = timeElapsed % 60;
+  const formattedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+  const formattedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+  console.log("time", time);
+  console.log("time2", time2);
+  
+  
+  return `${formattedMinutes}:${formattedSeconds}`;
+}

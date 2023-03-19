@@ -38,7 +38,7 @@ const GamePage: FC = () => {
       />
       {id === '1' ? (
         <GameField
-          size={2}
+          size={8}
           changeWin={changeWin}
           changeDied={changeDied}
           time={time}

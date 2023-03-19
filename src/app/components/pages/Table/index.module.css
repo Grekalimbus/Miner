@@ -28,6 +28,17 @@
 .buttons:hover{
     border: 2px solid rgb(207, 207, 207);
 }
+.buttonHome{
+    width: 50%;
+    height: 40px;
+    margin-bottom: 20px;
+    background-color: rgb(20, 20, 20);  
+    color: aliceblue;
+    border-radius: 4px;
+}
+.buttonHome:hover{
+    border: 2px solid rgb(207, 207, 207);
+}
 .list{
     background-color: rgb(20, 20, 20);  
     border: 1px solid rgb(187, 187, 187);
@@ -45,6 +56,9 @@
     .wrapperButton{
         width: 75%;        
     }
+    .buttonHome{
+        width: 75%
+    }
     .list{
         width: 75%; 
     }
@@ -52,9 +66,12 @@
 
 @media (max-width: 560px) {
     .wrapperButton{
-        width: 98%;        
+        width: 98%;             
+    }
+    .buttonHome{
+        width: 98%
     }
     .list{
-        width: 98%;  
+        width: 98%;        
     }
 }
