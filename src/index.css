@@ -22,6 +22,7 @@ html,body{
   -moz-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   background-color: rgb(39, 39, 39);  
+  font-weight: 600;
 }
 input,button,textarea{font-family:inherit;}
 input::-ms-clear{display: none;}
