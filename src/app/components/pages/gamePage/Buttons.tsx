@@ -1,6 +1,6 @@
-import React, { FC, useEffect, useState } from 'react';
-import styles from './index.module.css';
+import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
+import styles from './index.module.css';
 
 const Buttons: FC = () => {
   const history = useHistory();

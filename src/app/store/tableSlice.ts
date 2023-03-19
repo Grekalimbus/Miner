@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction, ThunkAction, Action } from '@reduxjs/toolkit';
 import { RootState } from '.';
 
-type TableData = {
-  [key: string]: {
+export type TableData = {   
     nik: string;
     lvl: string;
     time: string;
-  };
+    timeNum: number
+  
 };
 interface TableState {
   tableData: TableData[];
@@ -20,8 +20,8 @@ const tableSlice = createSlice({
   name: 'table',
   initialState,
   reducers: {
-    addData: (state, action: PayloadAction<TableData>) => {
-      state.tableData.push(action.payload);
+    addData: (state, action: PayloadAction<TableData[]>) => {
+      state.tableData = action.payload
     },
     resetTable: (state) => {
       state.tableData = [];
@@ -38,12 +38,8 @@ export const loadData = (): ThunkAction<void, RootState, unknown, Action<string>
   dispatch
 ) => {
   const data = localStorage.getItem('results');
-
-  if (data) {
-    const parsedData: TableData[] = JSON.parse(data);
-    parsedData.forEach((item) => {
-      dispatch(addData(item));
-    });
+  if (data) {       
+      dispatch(addData(JSON.parse(data)));    
   }
 };
 

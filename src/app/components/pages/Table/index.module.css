@@ -1,0 +1,83 @@
+.wrapper{
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;   
+    width: 100%;    
+    margin: 0 auto;
+    padding-top: 20px;     
+    color: rgb(255, 255, 255);    
+}
+
+.wrapperButton{
+    display: flex;   
+    align-items: center;  
+    justify-content: space-between;   
+    width: 50%;   
+    height: 40px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+.buttons{
+    width: 30%;
+    height: 100%;
+    border-radius: 4px;
+    color: aliceblue;
+    background-color: rgb(20, 20, 20);  
+}
+.buttons:hover{
+    border: 2px solid rgb(207, 207, 207);
+}
+.buttonHome{
+    width: 50%;
+    height: 40px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    color: aliceblue;
+    background-color: rgb(20, 20, 20);  
+}
+.buttonHome:hover{
+    border: 2px solid rgb(207, 207, 207);
+}
+.list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;     
+    justify-content: center;
+    margin: 2px;
+    width: 50%;
+    height: 30px;
+    border-radius: 4px;
+    border: 1px solid rgb(187, 187, 187);
+    background-color: rgb(20, 20, 20);  
+}
+.notData{
+    text-align: center;
+    margin-top: 20px;
+    font-size: 22px;
+    color: aliceblue;
+}
+
+@media (max-width: 860px) {
+    .wrapperButton{
+        width: 75%;        
+    }
+    .buttonHome{
+        width: 75%
+    }
+    .list{
+        width: 75%; 
+    }
+}
+
+@media (max-width: 560px) {
+    .wrapperButton{
+        width: 98%;             
+    }
+    .buttonHome{
+        width: 98%
+    }
+    .list{
+        width: 98%;        
+    }
+}
