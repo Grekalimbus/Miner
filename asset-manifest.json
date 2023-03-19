@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Miner/static/css/main.bd439575.css",
-    "main.js": "/Miner/static/js/main.880e2590.js",
+    "main.js": "/Miner/static/js/main.db1660f2.js",
     "index.html": "/Miner/index.html",
     "main.bd439575.css.map": "/Miner/static/css/main.bd439575.css.map",
-    "main.880e2590.js.map": "/Miner/static/js/main.880e2590.js.map"
+    "main.db1660f2.js.map": "/Miner/static/js/main.db1660f2.js.map"
   },
   "entrypoints": [
     "static/css/main.bd439575.css",
-    "static/js/main.880e2590.js"
+    "static/js/main.db1660f2.js"
   ]
 }
