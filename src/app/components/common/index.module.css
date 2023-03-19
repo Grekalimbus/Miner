@@ -5,10 +5,11 @@
     align-items: center;    
     justify-content: center;
     width: 30%;
-    height: 80%;
+    height: 100%;
+    font-size: 22px; 
     border-radius: 5px; 
     color: aliceblue;     
-    background-color: rgb(20, 20, 20);     
+    background-color: rgb(20, 20, 20);        
 }
 .buttonMainPage:hover{
     border: 2px solid rgb(207, 207, 207);
@@ -20,7 +21,7 @@
     justify-content: center;
     align-items: center;
     width: 20%;
-    height: 50px;
+    height: 40px;
     margin-top: 20px;  
     font-size: 24px;
     border-radius: 5px;    
@@ -28,12 +29,20 @@
     border: 2px solid rgb(150, 150, 150);          
 }
 
-@media (max-width: 760px) {
-    .buttonMainPage{
-        width: 31.5%;
-        font-size: 12px;
-    }
+
+@media (max-width: 760px) {    
     .timer{
         width: 40%;
     }
 }
+@media (max-width: 600px) {  
+    .buttonMainPage{
+        font-size: 20px; 
+    }      
+}
+@media (max-width: 420px) {  
+    .buttonMainPage{
+        font-size: 16px; 
+    }      
+}
+

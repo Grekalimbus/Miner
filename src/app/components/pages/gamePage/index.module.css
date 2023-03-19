@@ -30,6 +30,7 @@
     justify-content: center;
     width: 30%;
     height: 35px;
+    font-size: 30px;
     border-radius: 5px; 
     color: aliceblue;
     background-color: rgb(20, 20, 20);      
@@ -185,6 +186,7 @@
     }
     .button{
         width: 95%;
+        font-size: 24px;
     }  
 }
 
@@ -203,6 +205,10 @@
         width: 12.5px; 
         font-size: 9px;
     }
+    .button{
+        width: 95%;
+        font-size: 20px;
+    }  
 }
 @media (max-width: 400px) {    
     .cellBig{
