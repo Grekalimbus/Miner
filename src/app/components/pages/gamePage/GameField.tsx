@@ -1,11 +1,11 @@
 import React, { FC, useEffect, useState } from 'react';
-import styles from './index.module.css';
 import { Mask } from 'src/app/utils/gameField';
-import Cell from './Cell';
-import Buttons from './Buttons';
 import { chekedWin } from 'src/app/utils/checkWin';
 import { checksInUseEffect } from 'src/app/utils/checksInUseEffect';
 import { sizeField } from 'src/app/utils/sizeField';
+import Buttons from './Buttons';
+import Cell from './Cell';
+import styles from './index.module.css';
 
 interface Props {
   size: number;

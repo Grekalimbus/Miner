@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import styles from './index.module.css';
 import { TableData } from 'src/app/store/tableSlice';
+import styles from './index.module.css';
 
 interface Props {
   item: TableData;

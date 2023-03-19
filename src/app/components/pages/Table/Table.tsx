@@ -2,10 +2,10 @@ import React, { FC, useState, useEffect } from 'react';
 import { TableData } from 'src/app/store/tableSlice';
 import { cheksForUseEffect } from 'src/app/utils/table/cheksForUseEffect';
 import { useAppSelector } from 'src/hooks';
-import styles from './index.module.css';
+import { useHistory } from 'react-router-dom';
 import ButtonsLVL from './ButtonsLVL';
 import List from './List';
-import { useHistory } from 'react-router-dom';
+import styles from './index.module.css';
 
 const Table: FC = () => {
   const tableResult = useAppSelector(state => state.table.tableData);
@@ -15,7 +15,7 @@ const Table: FC = () => {
     cheksForUseEffect(tableResult, setTable);
   }, [tableResult]);
   return !table?.length ? (
-    <div>Данные отсутствуют</div>
+    <div className={styles.notData}>Данные отсутствуют</div>
   ) : (
     <div className={styles.wrapper}>
       Сортировка по сложности

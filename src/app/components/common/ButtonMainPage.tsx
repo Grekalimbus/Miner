@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import styles from './index.module.css';
 import { useHistory } from 'react-router-dom';
+import styles from './index.module.css';
 
 interface Props {
   title: string;

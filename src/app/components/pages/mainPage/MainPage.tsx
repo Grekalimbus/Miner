@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import ButtonMainPage from '../../common/ButtonMainPage';
+import { array } from './array';
 import styles from './index.module.css';
 
 const MainPage: FC = () => {
@@ -10,9 +11,9 @@ const MainPage: FC = () => {
         Это игра Сапёр и ты можешь выбрать одну из 3-х сложностей
       </h2>
       <div className={styles.buttonsMainPage}>
-        <ButtonMainPage title="Простой 8x8, 10 мин" id="1" />
-        <ButtonMainPage title="Средний 16x16, 40 мин" id="2" />
-        <ButtonMainPage title="Сложный 32x32, 100 мин" id="3" />
+        {array.map(item => {
+          return <ButtonMainPage title={item.titile} id={item.id} key={item.id} />;
+        })}
       </div>
       <ButtonMainPage title="Таблица лидеров" id="table" />
     </div>

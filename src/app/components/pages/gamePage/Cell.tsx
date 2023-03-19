@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
-import styles from './index.module.css';
 import { stylesCell } from 'src/app/utils/stylesCell';
 import { numberColor } from 'src/app/utils/numberColor';
 import { chekedWin } from 'src/app/utils/checkWin';
 import { clickCell } from 'src/app/utils/clickCell';
 import { clickContextMenu } from 'src/app/utils/clickContextMenu';
 import { Mask, mapMaskToView } from 'src/app/utils/gameField';
+import styles from './index.module.css';
 
 interface Props {
   size: number;
@@ -20,6 +20,16 @@ interface Props {
   lose: boolean;
 }
 
+function stylesForCell(size: number) {
+  if (size < 9) {
+    return styles.cellSmall;
+  } else if (size === 16) {
+    return styles.cellBig;
+  } else if (size === 32) {
+    return styles.cellVeryBig;
+  }
+}
+
 const Cell: FC<Props> = ({
   size,
   field,
@@ -32,16 +42,6 @@ const Cell: FC<Props> = ({
   setMask,
   lose,
 }) => {
-  function stylesForCell(size: number) {
-    if (size < 9) {
-      return styles.cellSmall;
-    } else if (size === 16) {
-      return styles.cellBig;
-    } else if (size === 32) {
-      return styles.cellVeryBig;
-    }
-  }
-
   return (
     <div
       className={stylesForCell(size)}

@@ -51,6 +51,12 @@
     justify-content: center;
     border-radius: 4px;
 }
+.notData{
+    text-align: center;
+    margin-top: 20px;
+    color: aliceblue;
+    font-size: 22px;
+}
 
 @media (max-width: 860px) {
     .wrapperButton{

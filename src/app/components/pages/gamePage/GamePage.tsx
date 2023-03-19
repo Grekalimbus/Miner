@@ -1,8 +1,8 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import styles from './index.module.css';
 import Timer from '../../common/Timer';
 import GameField from './GameField';
+import styles from './index.module.css';
 
 type GamePageParams = {
   id: string;
@@ -14,6 +14,7 @@ const GamePage: FC = () => {
   const [died, setDied] = useState(false);
   const [time, setTime] = useState<number>(0);
   const [lose, setLose] = useState<boolean>(false);
+  const size = id === '1' ? 8 : id === '2' ? 16 : 32;
   const changeWin = () => {
     setWin(true);
   };
@@ -36,31 +37,13 @@ const GamePage: FC = () => {
         changeTime={changeTime}
         changeLose={changeLose}
       />
-      {id === '1' ? (
-        <GameField
-          size={8}
-          changeWin={changeWin}
-          changeDied={changeDied}
-          time={time}
-          lose={lose}
-        />
-      ) : id === '2' ? (
-        <GameField
-          size={16}
-          changeWin={changeWin}
-          changeDied={changeDied}
-          time={time}
-          lose={lose}
-        />
-      ) : (
-        <GameField
-          size={32}
-          changeWin={changeWin}
-          changeDied={changeDied}
-          time={time}
-          lose={lose}
-        />
-      )}
+      <GameField
+        size={size}
+        changeWin={changeWin}
+        changeDied={changeDied}
+        time={time}
+        lose={lose}
+      />
     </div>
   );
 };
