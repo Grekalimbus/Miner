@@ -15,12 +15,14 @@ const Table: FC = () => {
     cheksForUseEffect(tableResult, setTable);
   }, [tableResult]);
   return !table?.length ? (
-    <div className={styles.notData}>Данные отсутствуют</div>
+    <div className={styles.notData}>
+      Данные отсутствуют. Выиграйте игру, чтобы отображалась статистика
+    </div>
   ) : (
     <div className={styles.wrapper}>
       Сортировка по сложности
       <ButtonsLVL table={table} setTable={setTable} />
-      <button onClick={() => history.push('/Miner')} className={styles.buttonHome}>
+      <button onClick={() => history.push('/')} className={styles.buttonHome}>
         Главная страница
       </button>
       {table.map(item => (

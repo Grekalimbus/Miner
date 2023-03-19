@@ -19,7 +19,7 @@ function App() {
   return (
     <div style={{ overflow: 'auto', height: '100vh' }}>
       <Switch>
-        <Route path="/Miner" exact>
+        <Route path="/" exact>
           <MainPage />
         </Route>
         <Route path="/play/:id?" exact>
