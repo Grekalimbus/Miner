@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction, ThunkAction, Action } from '@reduxjs/toolkit';
 import { RootState } from '.';
 
-type TableData = {
-  [key: string]: {
+export type TableData = {   
     nik: string;
     lvl: string;
     time: string;
-  };
+    timeNum: number
+  
 };
 interface TableState {
   tableData: TableData[];
