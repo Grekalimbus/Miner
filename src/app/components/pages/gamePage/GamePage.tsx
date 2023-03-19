@@ -14,6 +14,7 @@ const GamePage: FC = () => {
   const [died, setDied] = useState(false);
   const [time, setTime] = useState<number>(0);
   const [lose, setLose] = useState<boolean>(false);
+
   const size = id === '1' ? 8 : id === '2' ? 16 : 32;
   const changeWin = () => {
     setWin(true);
