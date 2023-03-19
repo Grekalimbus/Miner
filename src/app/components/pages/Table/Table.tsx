@@ -10,25 +10,29 @@ const Table: FC = () => {
   useEffect(() => {
     if (tableResult?.length) {
       const sortArr: TableData[] = [...tableResult].sort((a: TableData, b: TableData) => {
-        return a.timeNum - b.timeNum;
+        return b.timeNum - a.timeNum;
       });
       setTable(sortArr);
       console.log(table);
     }
   }, [tableResult]);
 
-  return (
+  return !table?.length ? (
+    <div>Данные отсутствуют</div>
+  ) : (
     <div className={styles.wrapper}>
-      {!table?.length ? (
-        <div>Данные отсутствуют</div>
-      ) : (
-        table.map(item => (
-          <div
-            className={styles.list}
-            key={item.nik + item.time + item.timeNum}
-          >{`${item.nik} ${item.lvl} ${item.time}`}</div>
-        ))
-      )}
+      Сортировка по сложности
+      <div className={styles.wrapperButton}>
+        <button className={styles.buttons}>Легкая</button>
+        <button className={styles.buttons}>Средняя</button>
+        <button className={styles.buttons}>Сложная</button>
+      </div>
+      {table.map(item => (
+        <div
+          className={styles.list}
+          key={item.nik + item.time + item.timeNum}
+        >{`Nik:${item.nik} | lvl:${item.lvl} | Time:${item.time}`}</div>
+      ))}
     </div>
   );
 };
