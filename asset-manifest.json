@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Miner/static/css/main.bd439575.css",
+    "main.js": "/Miner/static/js/main.0209d25e.js",
+    "index.html": "/Miner/index.html",
+    "main.bd439575.css.map": "/Miner/static/css/main.bd439575.css.map",
+    "main.0209d25e.js.map": "/Miner/static/js/main.0209d25e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bd439575.css",
+    "static/js/main.0209d25e.js"
+  ]
+}
