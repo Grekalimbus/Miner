@@ -36,9 +36,7 @@ There is also a leaderboard
 # Presentation
 
 ![alt text](https://i.postimg.cc/yYdTTX7y/image.png)
-![alt text](https://i.postimg.cc/FKtgmM3T/image.png)
 ![alt text](https://i.postimg.cc/sx1Z5m5B/image.png)
-![alt text](https://i.postimg.cc/Nf3rr1FM/image.png)
 
 <br />
 
